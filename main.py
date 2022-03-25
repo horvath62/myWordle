@@ -19,15 +19,17 @@ for w in words:
         w5.append(w.strip())
 #print(w5)
 
-# Enter list of possible letter and legal locations (i.e. 1  thru 5 )
+# Enter list of possible letter and possible locations (i.e. 1  thru 5 )
 letterlist = []
 letterdict = {}
+
 while True:
-    letter = input("Enter Single Lowercase Letter?")
-    if len(letter) == 0:
+    alphanumber = input("Enter Letter and Possible Positions (i.e. A125)\nEnter zero for position if not in word(i.e. A0?")
+    if len(alphanumber) == 0:
         break
+    letter = alphanumber[0].lower()
     letterlist.append(letter)
-    locnumbers = input("Enter Possible Location (i.e. 125)?")
+    locnumbers = alphanumber[1:]
     loclist = [int(a) for a in str(locnumbers)]
     letterdict[letter] = loclist
     print("")
@@ -38,25 +40,33 @@ while True:
 print("")
 print("LETTER CRITERIA:")
 for letter in letterlist:
-    print("Letter:", letter, "  Location: ", end="")
+    print("Letter:", letter.upper(), "  Location: ", end="")
     for location in letterdict[letter]:
         print(location, end="")
     print("")
 
 
-# Search Word List for Words meeting criteria
+# Search five letter Word List for Words meeting criteria
 validwords = []
 wordcount = 0
 for w in w5:
     wordtest = True
     for letter in letterlist:
-        positiontest = False
         #print("letter:", letter)
-        for position in letterdict[letter]:
-            #print("  position:", position)
-            if w[position-1] == letter:
-                #print("      #### word:", w)
-                positiontest = True
+        loclist = letterdict[letter]
+
+        if loclist[0] == 0:
+            positiontest = True
+            for position in range(5):
+                #print("  position:", position)
+                if w[position-1] == letter:
+                    positiontest = False
+
+        else:
+            positiontest = False
+            for position in loclist:
+                if w[position-1] == letter:
+                    positiontest = True
 
         if positiontest == False:
             wordtest = False
@@ -76,5 +86,6 @@ for w in validwords:
     if i % 10 == 0:
         print("")
 print("")
-
+print("")
+print("Matching Word Count:", wordcount)
 
