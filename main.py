@@ -6,6 +6,7 @@ print("<<<< SUPER WORDLE HELPER >>>>")
 wordfile = "20k_words.txt"
 # Open english list of words, save to list
 print("Opening Word File:", wordfile)
+print("")
 f = open(wordfile, 'r', encoding='utf-8')
 words = f.readlines()
 f.close()
@@ -22,19 +23,26 @@ for w in words:
 letterlist = []
 letterdict = {}
 while True:
-    letter = input("Enter Single Letter?")
+    letter = input("Enter Single Lowercase Letter?")
     if len(letter) == 0:
         break
     letterlist.append(letter)
     locnumbers = input("Enter Possible Location (i.e. 125)?")
     loclist = [int(a) for a in str(locnumbers)]
-    #for x in range(len(loclist)):
-    #print(x, loclist[x])
     letterdict[letter] = loclist
+    print("")
     print("Enter Next Letter or Return when done")
 
 #print(letterlist)
 #print(letterdict)
+print("")
+print("LETTER CRITERIA:")
+for letter in letterlist:
+    print("Letter:", letter, "  Location: ", end="")
+    for location in letterdict[letter]:
+        print(location, end="")
+    print("")
+
 
 # Search Word List for Words meeting criteria
 validwords = []
@@ -58,11 +66,15 @@ for w in w5:
         wordcount = wordcount + 1
 
 # Print Results
+print("")
 print("Matching Word Count:", wordcount)
 print("")
+i = 0
 for w in validwords:
     print(w, " ", end="")
+    i = i + 1
+    if i % 10 == 0:
+        print("")
 print("")
-print("")
-print("Matching Word Count:", wordcount)
+
 
