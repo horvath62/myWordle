@@ -3,7 +3,7 @@
 ### WORDLE HELPER ###
 print("<<<< SUPER WORDLE HELPER >>>>")
 
-wordfile = "20k_words.txt"
+wordfile = "five_letter.txt"
 # Open english list of words, save to list
 print("Opening Word File:", wordfile)
 print("")
@@ -11,13 +11,28 @@ f = open(wordfile, 'r', encoding='utf-8')
 words = f.readlines()
 f.close()
 
+
 # Make list of five letter words
 w5 = []
+
 for w in words:
-    if len(w.strip()) == 5:
+    #if len(w.strip()) == 5:
         #print(w)
         w5.append(w.strip())
 #print(w5)
+
+
+'''
+fw = open("five_letter.txt", 'w')
+for w in w5:
+    fw.write(w)
+    fw.write('\n')
+fw.close()
+'''
+
+
+
+
 
 # Enter list of possible letter and possible locations (i.e. 1  thru 5 )
 letterlist = []
