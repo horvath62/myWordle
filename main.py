@@ -4,6 +4,7 @@
 print("<<<< SUPER WORDLE HELPER >>>>")
 
 wordfile = "five_letter.txt"
+wordfile = "english_words_350k.txt"
 # Open english list of words, save to list
 print("Opening Word File:", wordfile)
 print("")
@@ -16,7 +17,7 @@ f.close()
 w5 = []
 
 for w in words:
-    #if len(w.strip()) == 5:
+    if len(w.strip()) == 5:
         #print(w)
         w5.append(w.strip())
 #print(w5)
