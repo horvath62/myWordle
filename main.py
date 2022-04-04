@@ -1,4 +1,4 @@
-
+import re
 
 ### WORDLE HELPER ###
 print("<<<< SUPER WORDLE HELPER >>>>")
@@ -48,6 +48,7 @@ letterdict = {}
 
 print("Enter Letter followed by possible positions (i.e. A125)")
 print("Enter zero for position if not in word (i.e. A0)")
+print("Enter multiple letter not in word (i.e. BCSZ)")
 print("Enter Return when done")
 print("")
 
@@ -55,18 +56,35 @@ while True:
     alphanumber = input("Enter Letter Positions (i.e.A125 or A0)?")
     if len(alphanumber) == 0:
         break
-    letter = alphanumber[0].lower()
-    letterlist.append(letter)
-    locnumbers = alphanumber[1:]
-    loclist = [int(a) for a in str(locnumbers)]
-    letterdict[letter] = loclist
+    if len(alphanumber) == 1:
+        #single char, elimination
+        letter = alphanumber[0].lower()
+        letterlist.append(letter)
+        letterdict[letter] = [0]
+    else:
+        # more than one char
+        if alphanumber[1].isdigit():
+            #second char is a number
+            letter = alphanumber[0].lower()
+            letterlist.append(letter)
+            locnumbers = alphanumber[1:]
+            loclist = [int(a) for a in str(locnumbers)]
+            letterdict[letter] = loclist
+        else:
+            #second number is not number, elimination list
+            for letter in alphanumber:
+                letterlist.append(letter.lower())
+                letterdict[letter] = [0]
+
+
 
 #print(letterlist)
 #print(letterdict)
 print("")
 print("LETTER CRITERIA:")
+print("Letter:  Position:")
 for letter in letterlist:
-    print("Letter:", letter.upper(), "  Location: ", end="")
+    print(letter.upper(), '       ', end="")
     for location in letterdict[letter]:
         print(location, end="")
     print("")
@@ -103,7 +121,7 @@ for w in wordscommon:
 
 # Print Results
 print("")
-print("Matching Word Count from Common Word List:", wordcount)
+print("MATCHING WORDS FROM 20k WORD LIST:", wordcount, "WORDS")
 i = 0
 for w in validwords:
     print(w, " ", end="")
@@ -111,6 +129,42 @@ for w in validwords:
     if i % 10 == 0:
         print("")
 print("")
+
+# Elimination Words.   That dont contain any of the letters.
+validwords = []
+wordcount = 0
+for w in wordscommon:
+    wordtest = False
+    for letter in letterlist:
+        #print("letter:", letter)
+        positiontest = False
+        for position in range(5):
+            #print("  position:", position)
+            if w[position-1] == letter:
+                positiontest = True
+
+        if positiontest == True:
+            wordtest = True
+
+    if wordtest == False:
+        if wordcount < 50:
+            validwords.append(w)
+            wordcount = wordcount + 1
+
+# Print Results
+print("")
+print("ELIMINATION WORD LIST:  ", wordcount, " Words that don't contain any of the letters")
+i = 0
+for w in validwords:
+    print(w, " ", end="")
+    i = i + 1
+    if i % 10 == 0:
+        print("")
+print("")
+
+
+
+
 
 # Search five letter Big Word List for Words meeting criteria
 validwords = []
@@ -143,7 +197,7 @@ for w in wordsbig:
 
 # Print Results
 print("")
-print("Matching Word Count from 350K word list:", wordcount)
+print("MATCHING WORDS FROM 350K WORD LIST:", wordcount, "WORDS")
 i = 0
 for w in validwords:
     print(w, " ", end="")
