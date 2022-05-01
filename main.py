@@ -1,4 +1,5 @@
 import re
+from myClass import *
 
 ### WORDLE HELPER ###
 print("<<<< SUPER WORDLE HELPER >>>>")
@@ -90,6 +91,10 @@ for letter in letterlist:
     print("")
 
 
+
+# ###############  PROCESSES AND PRINT  ##########################
+
+
 # Search five letter Common Word List for Words meeting criteria
 validwords = []
 wordcount = 0
@@ -120,8 +125,14 @@ for w in wordscommon:
         wordcount = wordcount + 1
 
 # Print Results
+w1title = "MATCHING WORDS FROM 20k WORD LIST:"
+w1 = Wordlist(validwords,w1title)
+w1.printwords(5)
+
+
+
 print("")
-print("MATCHING WORDS FROM 20k WORD LIST:", wordcount, "WORDS")
+print(w1title, wordcount, "WORDS")
 i = 0
 for w in validwords:
     print(w, " ", end="")
@@ -150,6 +161,9 @@ for w in wordscommon:
         if wordcount < 50:
             validwords.append(w)
             wordcount = wordcount + 1
+
+
+
 
 # Print Results
 print("")
