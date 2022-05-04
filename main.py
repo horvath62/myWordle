@@ -6,12 +6,17 @@ print("<<<< SUPER WORDLE HELPER >>>>")
 
 wordfile_common = "five_letter.txt"
 wordfile_big = "five_letter_350k.txt"
+wordfile_corncob = "five_letter_58k.txt"
 # Open english list of words, save to list
 print("Opening Word File:", wordfile_common)
 print("Opening Word File:", wordfile_big)
 print("")
 f = open(wordfile_common, 'r', encoding='utf-8')
 words_common = f.readlines()
+f.close()
+
+f = open(wordfile_corncob, 'r', encoding='utf-8')
+words_corncob = f.readlines()
 f.close()
 
 f = open(wordfile_big, 'r', encoding='utf-8')
@@ -22,26 +27,33 @@ f.close()
 # Make list of five letter words
 wordscommon = []
 wordsbig=[]
+wordscorncob=[]
+
 
 for w in words_common:
     if len(w.strip()) == 5:
         #print(w)
         wordscommon.append(w.strip())
 
+for w in words_corncob:
+    if len(w.strip()) == 5:
+        #print(w)
+        wordscorncob.append(w.strip())
+
 for w in words_big:
     if len(w.strip()) == 5:
         #print(w)
         wordsbig.append(w.strip())
 
-
 '''
-#print back filtered words
-fw = open("five_letter_350k.txt", 'w')
-for w in words:
+#print back filtered words list
+fw = open("five_letter_58k.txt", 'w')
+for w in wordscorncob:
     fw.write(w)
     fw.write('\n')
 fw.close()
 '''
+
 
 # Enter list of possible letter and possible locations (i.e. 1  thru 5 )
 letterlist = []
@@ -158,6 +170,45 @@ w99 = Wordlist(validwords,w99title)
 w99.printwords(12)
 
 
+
+
+# Search five letter Corncob Word List for Words meeting criteria
+validwords = []
+wordcount = 0
+for w in wordscorncob:
+    wordtest = True
+    for letter in letterlist:
+        #print("letter:", letter)
+        loclist = letterdict[letter]
+
+        if loclist[0] == 0:
+            positiontest = True
+            for position in range(5):
+                #print("  position:", position)
+                if w[position-1] == letter:
+                    positiontest = False
+
+        else:
+            positiontest = False
+            for position in loclist:
+                if w[position-1] == letter:
+                    positiontest = True
+
+        if positiontest == False:
+            wordtest = False
+
+    if wordtest == True:
+        validwords.append(w)
+        wordcount = wordcount + 1
+
+# Print Results
+w2title = "MATCHING WORDS FROM 58K WORD LIST:"
+w2 = Wordlist(validwords,w2title)
+w2.printwords(12)
+
+
+
+
 # Search five letter Big Word List for Words meeting criteria
 validwords = []
 wordcount = 0
@@ -188,8 +239,8 @@ for w in wordsbig:
         wordcount = wordcount + 1
 
 # Print Results
-w2title = "MATCHING WORDS FROM 350K WORD LIST:"
-w2 = Wordlist(validwords,w2title)
-w2.printwords(12)
+w3title = "MATCHING WORDS FROM 350K WORD LIST:"
+w3 = Wordlist(validwords,w3title)
+w3.printwords(12)
 
 
