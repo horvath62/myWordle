@@ -15,5 +15,5 @@ class Wordlist:
             print("")
 
       print("")
-      print("##########")
+
 
