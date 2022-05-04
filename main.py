@@ -127,10 +127,10 @@ for w in wordscommon:
 # Print Results
 w1title = "MATCHING WORDS FROM 20k WORD LIST:"
 w1 = Wordlist(validwords,w1title)
-w1.printwords(5)
+w1.printwords(12)
 
 
-
+'''
 print("")
 print(w1title, wordcount, "WORDS")
 i = 0
@@ -140,8 +140,11 @@ for w in validwords:
     if i % 10 == 0:
         print("")
 print("")
+'''
 
 # Elimination Words.   That dont contain any of the letters.
+
+
 validwords = []
 wordcount = 0
 for w in wordscommon:
@@ -163,8 +166,11 @@ for w in wordscommon:
             wordcount = wordcount + 1
 
 
+w99title = "ELIMINATION WORD LIST (don't contain any of the letters):"
+w99 = Wordlist(validwords,w99title)
+w99.printwords(12)
 
-
+'''
 # Print Results
 print("")
 print("ELIMINATION WORD LIST:  ", wordcount, " Words that don't contain any of the letters")
@@ -175,10 +181,7 @@ for w in validwords:
     if i % 10 == 0:
         print("")
 print("")
-
-
-
-
+'''
 
 # Search five letter Big Word List for Words meeting criteria
 validwords = []
@@ -209,7 +212,16 @@ for w in wordsbig:
         validwords.append(w)
         wordcount = wordcount + 1
 
+
+
+
+
 # Print Results
+w2title = "MATCHING WORDS FROM 350K WORD LIST:"
+w2 = Wordlist(validwords,w2title)
+w2.printwords(12)
+
+'''
 print("")
 print("MATCHING WORDS FROM 350K WORD LIST:", wordcount, "WORDS")
 i = 0
@@ -218,5 +230,7 @@ for w in validwords:
     i = i + 1
     if i % 10 == 0:
         print("")
+        
+'''
 
 
