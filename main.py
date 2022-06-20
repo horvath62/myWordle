@@ -6,7 +6,7 @@ print("<<<< SUPER WORDLE HELPER >>>>")
 
 wordfile_common = "five_letter.txt"
 wordfile_big = "five_letter_350k.txt"
-wordfile_corncob = "five_letter_58k.txt"
+wordfile_corncob = "english_71k_words.txt"
 # Open english list of words, save to list
 print("Opening Word File:", wordfile_common)
 print("Opening Word File:", wordfile_big)
@@ -200,7 +200,7 @@ for w in wordscorncob:
         wordcount = wordcount + 1
 
 # Print Results
-w2title = "MATCHING WORDS FROM 58K WORD LIST:"
+w2title = "MATCHING WORDS FROM 71K MERGED WORD LIST:"
 w2 = Wordlist(validwords,w2title)
 w2.printwords(12, 1000)
 
