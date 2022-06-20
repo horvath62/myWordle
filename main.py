@@ -139,7 +139,7 @@ for w in wordscommon:
 # Print Results
 w1title = "MATCHING WORDS FROM 20k WORD LIST:"
 w1 = Wordlist(validwords,w1title)
-w1.printwords(12)
+w1.printwords(12, 1000)
 
 
 
@@ -167,9 +167,7 @@ for w in wordscommon:
 
 w99title = "ELIMINATION WORD LIST (don't contain any of the letters):"
 w99 = Wordlist(validwords,w99title)
-w99.printwords(12)
-
-
+w99.printwords(12, 1000)
 
 
 # Search five letter Corncob Word List for Words meeting criteria
@@ -204,9 +202,7 @@ for w in wordscorncob:
 # Print Results
 w2title = "MATCHING WORDS FROM 58K WORD LIST:"
 w2 = Wordlist(validwords,w2title)
-w2.printwords(12)
-
-
+w2.printwords(12, 1000)
 
 
 # Search five letter Big Word List for Words meeting criteria
@@ -241,6 +237,6 @@ for w in wordsbig:
 # Print Results
 w3title = "MATCHING WORDS FROM 350K WORD LIST:"
 w3 = Wordlist(validwords,w3title)
-w3.printwords(12)
+w3.printwords(12, 1000)
 
 
