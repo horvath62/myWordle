@@ -4,56 +4,19 @@ from myClass import *
 ### WORDLE HELPER ###
 print("<<<< SUPER WORDLE HELPER >>>>")
 
-wordfile_common = "five_letter.txt"
-wordfile_big = "five_letter_350k.txt"
-wordfile_corncob = "english_71k_words.txt"
-# Open english list of words, save to list
-print("Opening Word File:", wordfile_common)
-print("Opening Word File:", wordfile_big)
-print("")
-f = open(wordfile_common, 'r', encoding='utf-8')
-words_common = f.readlines()
-f.close()
-
-f = open(wordfile_corncob, 'r', encoding='utf-8')
-words_corncob = f.readlines()
-f.close()
-
-f = open(wordfile_big, 'r', encoding='utf-8')
-words_big = f.readlines()
-f.close()
-
+wordfile_20k = "fiveletter_20k_trimmed.txt"
+wordfile_71k = "fiveletter_71k.txt"
+wordfile_350k= "fiveletter_350k.txt"
 
 # Make list of five letter words
-wordscommon = []
-wordsbig=[]
-wordscorncob=[]
+w20k = Wordlist([], "20K WORD FILE")
+w20k.readwordfile(wordfile_20k)
 
+w71k = Wordlist([], "71K WORD FILE")
+w71k.readwordfile(wordfile_71k)
 
-for w in words_common:
-    if len(w.strip()) == 5:
-        #print(w)
-        wordscommon.append(w.strip())
-
-for w in words_corncob:
-    if len(w.strip()) == 5:
-        #print(w)
-        wordscorncob.append(w.strip())
-
-for w in words_big:
-    if len(w.strip()) == 5:
-        #print(w)
-        wordsbig.append(w.strip())
-
-'''
-#print back filtered words list
-fw = open("five_letter_58k.txt", 'w')
-for w in wordscorncob:
-    fw.write(w)
-    fw.write('\n')
-fw.close()
-'''
-
+w350k = Wordlist([], "350k WORD LIST")
+w350k.readwordfile(wordfile_350k)
 
 # Enter list of possible letter and possible locations (i.e. 1  thru 5 )
 letterlist = []
@@ -110,7 +73,8 @@ for letter in letterlist:
 # Search five letter Common Word List for Words meeting criteria
 validwords = []
 wordcount = 0
-for w in wordscommon:
+for w in w20k.words:
+    print('#',w,'#')
     wordtest = True
     for letter in letterlist:
         #print("letter:", letter)
@@ -121,6 +85,7 @@ for w in wordscommon:
             for position in range(5):
                 #print("  position:", position)
                 if w[position-1] == letter:
+
                     positiontest = False
 
         else:
@@ -146,7 +111,7 @@ w1.printwords(12, 1000)
 # Elimination Words.   That dont contain any of the letters.
 validwords = []
 wordcount = 0
-for w in wordscommon:
+for w in w20k.words:
     wordtest = False
     for letter in letterlist:
         #print("letter:", letter)
@@ -173,7 +138,7 @@ w99.printwords(12, 1000)
 # Search five letter Corncob Word List for Words meeting criteria
 validwords = []
 wordcount = 0
-for w in wordscorncob:
+for w in w71k.words:
     wordtest = True
     for letter in letterlist:
         #print("letter:", letter)
@@ -208,7 +173,7 @@ w2.printwords(12, 1000)
 # Search five letter Big Word List for Words meeting criteria
 validwords = []
 wordcount = 0
-for w in wordsbig:
+for w in w350k.words:
     wordtest = True
     for letter in letterlist:
         #print("letter:", letter)

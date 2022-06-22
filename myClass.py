@@ -60,8 +60,13 @@ class Wordlist:
       self.words.append(word)
 
   def printwords(self, numcols, maxwords):
-      print("##########")
-      print(self.title, " ", len(self.words), " Words" )
+      print("")
+      print("----- ", self.title, " ", len(self.words), " words", " -----", end="" )
+      if len(self.words)>maxwords:
+          print(" showing ", maxwords, " words -----")
+      else:
+          print("")
+
       col=0
       cnt = 0
 
