@@ -61,7 +61,7 @@ class Wordlist:
 
   def printwords(self, numcols, maxwords):
       print("")
-      print("----- ", self.title, " ", len(self.words), " words", " -----", end="" )
+      print("-------- ", self.title, " ", len(self.words), " words", " --------", end="" )
       if len(self.words)>maxwords:
           print(" showing ", maxwords, " words -----")
       else:
@@ -79,15 +79,12 @@ class Wordlist:
           if cnt >= maxwords:
               break
 
-      print("")
-
   def searchresults(self, letterlist, letterdict):
 
       # Search five letter Common Word List for Words meeting criteria
       validwords = []
       wordcount = 0
       for w in self.words:
-          print('#', w, '#')
           wordtest = True
           for letter in letterlist:
               # print("letter:", letter)

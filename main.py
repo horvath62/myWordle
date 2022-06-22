@@ -69,49 +69,6 @@ for letter in letterlist:
 
 # ###############  PROCESSES AND PRINT  ##########################
 
-
-wresults = Wordlist(w20k.searchresults(letterlist, letterdict),"WORDS FROM 20K WORD LIST")
-wresults.printwords(16,1000)
-
-print("------------------------------")
-
-# Search five letter Common Word List for Words meeting criteria
-validwords = []
-wordcount = 0
-for w in w20k.words:
-    wordtest = True
-    for letter in letterlist:
-        #print("letter:", letter)
-        loclist = letterdict[letter]
-
-        if loclist[0] == 0:
-            positiontest = True
-            for position in range(5):
-                #print("  position:", position)
-                if w[position-1] == letter:
-
-                    positiontest = False
-
-        else:
-            positiontest = False
-            for position in loclist:
-                if w[position-1] == letter:
-                    positiontest = True
-
-        if positiontest == False:
-            wordtest = False
-
-    if wordtest == True:
-        validwords.append(w)
-        wordcount = wordcount + 1
-
-# Print Results
-w1title = "MATCHING WORDS FROM 20k WORD LIST:"
-w1 = Wordlist(validwords,w1title)
-w1.printwords(12, 1000)
-
-
-
 # Elimination Words.   That dont contain any of the letters.
 validwords = []
 wordcount = 0
@@ -124,88 +81,40 @@ for w in w20k.words:
             #print("  position:", position)
             if w[position-1] == letter:
                 positiontest = True
-
         if positiontest == True:
             wordtest = True
-
     if wordtest == False:
         if wordcount < 50:
             validwords.append(w)
             wordcount = wordcount + 1
 
-
 w99title = "ELIMINATION WORD LIST (don't contain any of the letters):"
 w99 = Wordlist(validwords,w99title)
 w99.printwords(12, 1000)
 
-
-# Search five letter Corncob Word List for Words meeting criteria
-validwords = []
-wordcount = 0
-for w in w71k.words:
-    wordtest = True
-    for letter in letterlist:
-        #print("letter:", letter)
-        loclist = letterdict[letter]
-
-        if loclist[0] == 0:
-            positiontest = True
-            for position in range(5):
-                #print("  position:", position)
-                if w[position-1] == letter:
-                    positiontest = False
-
-        else:
-            positiontest = False
-            for position in loclist:
-                if w[position-1] == letter:
-                    positiontest = True
-
-        if positiontest == False:
-            wordtest = False
-
-    if wordtest == True:
-        validwords.append(w)
-        wordcount = wordcount + 1
-
-# Print Results
-w2title = "MATCHING WORDS FROM 71K MERGED WORD LIST:"
-w2 = Wordlist(validwords,w2title)
-w2.printwords(12, 1000)
+print("")
 
 
-# Search five letter Big Word List for Words meeting criteria
-validwords = []
-wordcount = 0
-for w in w350k.words:
-    wordtest = True
-    for letter in letterlist:
-        #print("letter:", letter)
-        loclist = letterdict[letter]
 
-        if loclist[0] == 0:
-            positiontest = True
-            for position in range(5):
-                #print("  position:", position)
-                if w[position-1] == letter:
-                    positiontest = False
 
-        else:
-            positiontest = False
-            for position in loclist:
-                if w[position-1] == letter:
-                    positiontest = True
 
-        if positiontest == False:
-            wordtest = False
 
-    if wordtest == True:
-        validwords.append(w)
-        wordcount = wordcount + 1
+wr20k = Wordlist(w20k.searchresults(letterlist, letterdict),"WORDS FROM 20K WORD LIST")
+wr20k.printwords(16,1000)
 
-# Print Results
-w3title = "MATCHING WORDS FROM 350K WORD LIST:"
-w3 = Wordlist(validwords,w3title)
-w3.printwords(12, 1000)
+wr71k = Wordlist(w71k.searchresults(letterlist, letterdict),"WORDS FROM 71K WORD LIST")
+wr71k = Wordlist(wr71k.uniquewords(wr20k.words), "Unique Words from 71K word list")
+wr71k.printwords(16,1000)
+
+wr350k = Wordlist(w350k.searchresults(letterlist, letterdict),"WORDS FROM 350K WORD LIST")
+wr350k = Wordlist(wr350k.uniquewords(wr71k.words), "Unique Words from 350K word list")
+wr350k = Wordlist(wr350k.uniquewords(wr20k.words), "Unique Words from 350K word list")
+wr350k.printwords(16,1000)
+
+print("")
+print("------------------------------")
+
+
+
 
 
