@@ -81,4 +81,62 @@ class Wordlist:
 
       print("")
 
+  def searchresults(self, letterlist, letterdict):
+
+      # Search five letter Common Word List for Words meeting criteria
+      validwords = []
+      wordcount = 0
+      for w in self.words:
+          print('#', w, '#')
+          wordtest = True
+          for letter in letterlist:
+              # print("letter:", letter)
+              loclist = letterdict[letter]
+
+              if loclist[0] == 0:
+                  positiontest = True
+                  for position in range(5):
+                      # print("  position:", position)
+                      if w[position - 1] == letter:
+                          positiontest = False
+
+              else:
+                  positiontest = False
+                  for position in loclist:
+                      if w[position - 1] == letter:
+                          positiontest = True
+
+              if positiontest == False:
+                  wordtest = False
+
+          if wordtest == True:
+              validwords.append(w)
+              wordcount = wordcount + 1
+
+      return validwords
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

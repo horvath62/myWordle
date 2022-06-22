@@ -70,11 +70,15 @@ for letter in letterlist:
 # ###############  PROCESSES AND PRINT  ##########################
 
 
+wresults = Wordlist(w20k.searchresults(letterlist, letterdict),"WORDS FROM 20K WORD LIST")
+wresults.printwords(16,1000)
+
+print("------------------------------")
+
 # Search five letter Common Word List for Words meeting criteria
 validwords = []
 wordcount = 0
 for w in w20k.words:
-    print('#',w,'#')
     wordtest = True
     for letter in letterlist:
         #print("letter:", letter)
